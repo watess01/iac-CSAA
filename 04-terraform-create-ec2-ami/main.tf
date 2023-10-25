@@ -94,7 +94,6 @@ resource "aws_volume_attachment" "ebs_att" {
 # output "bastion_key_pem" {
 #   value = tls_private_key.pk-bastion.private_key_pem
 #     sensitive = true
-
 # }
 
 # create an Amazon Machine Image based on the instance
@@ -109,7 +108,7 @@ resource "aws_launch_template" "web" {
   name = "web-launch-template"
   image_id = format("am%s", aws_ami_from_instance.web.source_instance_id)
   instance_type = "t2.micro"
-  key_name = "terraform"
+  # key_name = "terraform"
   vpc_security_group_ids = [aws_security_group.public.id]
   # create an EBS volume
   block_device_mappings {
