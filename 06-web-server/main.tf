@@ -82,5 +82,5 @@ resource "aws_instance" "web" {
 }
 
 output "ec2_global_ips" {
-  value = ["${aws_instance.main.*.public_ip}"]
+  value = ["${aws_instance.web.*.public_ip}"]
 }
