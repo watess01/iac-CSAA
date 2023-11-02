@@ -5,7 +5,7 @@ resource "aws_lb" "NLB1" {
     internal = false
     ip_address_type = "ipv4"
   load_balancer_type = "network"
-  enable_deletion_protection = true
+  enable_deletion_protection = false
   subnets            = [for subnet in aws_subnet.public : subnet.id]
   # map to the availability zones
 
