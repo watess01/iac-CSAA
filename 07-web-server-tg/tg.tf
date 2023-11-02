@@ -54,3 +54,4 @@ resource "aws_lb_target_group_attachment" "nlb" {
     target_id = aws_instance.web[count.index].id
     port = 80
 }
+
