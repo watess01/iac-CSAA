@@ -1,6 +1,6 @@
 resource "aws_instance" "web" {
   # 1 instance per availability zone
-  count             = length(var.availability_zones)
+  count           = length(var.availability_zones)
   ami             = var.ami
   instance_type   = var.instance_type
   key_name        = var.instance_key

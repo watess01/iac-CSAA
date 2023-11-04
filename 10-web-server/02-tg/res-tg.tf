@@ -3,10 +3,10 @@
 resource "aws_lb_target_group" "alb" {
 
     target_type = "instance"
-    name = "TG-ALB"
+    name = "${var.prefix}-ALB"
     protocol    = "HTTP"
     port        = 80
-    vpc_id      = aws_vpc.my_vpc.id    
+    vpc_id      = var.vpc_id 
     
     health_check {
         path = "/"
@@ -23,9 +23,9 @@ resource "aws_lb_target_group" "alb" {
 # attach instances to target group
 
 resource "aws_lb_target_group_attachment" "alb" {
-    count = var.instance_count
+    count = length(var.availability_zones)
     target_group_arn = aws_lb_target_group.alb.arn
-    target_id = aws_instance.web[count.index].id
+    target_id = var.aws_instance_web[count.index].id
     port = 80
 }
 
@@ -36,8 +36,8 @@ resource "aws_lb_target_group" "nlb" {
     name = "TG-NLB"
     protocol    = "TCP"
     port        = 80
-    vpc_id      = aws_vpc.my_vpc.id    
-    
+    vpc_id      = var.vpc_id
+
     health_check {
         port = 80
         protocol = "TCP"
@@ -49,9 +49,9 @@ resource "aws_lb_target_group" "nlb" {
 }
 
 resource "aws_lb_target_group_attachment" "nlb" {
-    count = var.instance_count
+    count = length(var.availability_zones)
     target_group_arn = aws_lb_target_group.nlb.arn
-    target_id = aws_instance.web[count.index].id
+    target_id = var.aws_instance_web[count.index].id
     port = 80
 }
 
