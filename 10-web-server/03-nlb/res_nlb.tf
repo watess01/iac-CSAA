@@ -8,8 +8,7 @@ resource "aws_lb" "NLB1" {
   enable_deletion_protection = false
   subnets            = [for subnet in var.aws_subnet_public : subnet.id]
   # map to the availability zones
-
-
+  name = "NLB1"
 
   tags = {
     Environment = "production"
