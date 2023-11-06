@@ -7,3 +7,5 @@ variable "vpc_cidr" { default = "10.0.0.0/16" }
 # variable "public_subnet_cidr" { default = "10.0.1.0/25" }
 variable ami { default = "ami-0dab0800aa38826f2" }
 variable prefix { default = "trg" }
+variable aws_volume_size { default = "8" }
+variable aws_volume_type { default = "gp2" }
