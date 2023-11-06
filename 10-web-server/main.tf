@@ -6,7 +6,6 @@ terraform {
       version = "~> 4.16"
     }
   }
-
   required_version = ">= 1.2.0"
 }
 
@@ -14,7 +13,6 @@ terraform {
 provider "aws" {
   region = "eu-west-1"
 }
-
 
 module "web-server" {
   source = "./01-web-server"
@@ -28,7 +26,6 @@ module "web-server" {
 module "auto-scaling" {
   depends_on = [ module.web-server ]
   source = "./02-auto-scaling"
-  # aws_ami_id = var.aws_ami_id
   aws_instance_type = var.instance_type
   aws_security_group_ids = module.web-server.aws_security_group_ids
   aws_volume_size = var.aws_volume_size
@@ -39,13 +36,11 @@ module "auto-scaling" {
   aws_subnet_public = module.web-server.aws_subnet_public
 }
 module "tg" {
-  
   depends_on = [module.web-server]
   source = "./03-tg"
   availability_zones = var.availability_zones
   vpc_id = module.web-server.vpc_id
   aws_instance_web = module.web-server.aws_instance_web
-
 }
 
 module "nlb" {
@@ -61,7 +56,6 @@ module "alb" {
   aws_lb_target_group_alb_arn = module.tg.aws_lb_target_group_alb_arn
   aws_subnet_public = module.web-server.aws_subnet_public
   aws_security_group_ids = module.web-server.aws_security_group_ids
-  
 }
 
 
