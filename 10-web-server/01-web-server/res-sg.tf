@@ -1,5 +1,5 @@
-resource "aws_security_group" "sg" {
-  name        = "allow_ssh_http"
+resource "aws_security_group" "webaccess" {
+  name        = "webaccess"
   description = "Allow ssh http inbound traffic"
   vpc_id      = aws_vpc.my_vpc.id
 
@@ -30,6 +30,6 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-    Name = "06-allow_ssh_http"
+    Name = "${var.prefix}-allow_ssh_http"
   }
 }
