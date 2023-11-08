@@ -9,7 +9,7 @@ resource "aws_launch_template" "ASG" {
   
   vpc_security_group_ids = [for id in var.aws_security_group_ids : id]
  
-  user_data = filebase64("${path.root}/userdata.sh")
+  user_data = file("${path.root}/userdata.sh")
   # map to the availability zones
   block_device_mappings {
     device_name = "/dev/xvda"
