@@ -47,6 +47,14 @@ resource "aws_security_group" "allow_ssh_http" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  # permit ping to private subnets
+  ingress {
+    description = "ICMP from anywhere"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
 
   egress {
     from_port   = 0
@@ -54,7 +62,6 @@ resource "aws_security_group" "allow_ssh_http" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   tags = {
     name = "${var.prefix}-vpc-sg"
   }

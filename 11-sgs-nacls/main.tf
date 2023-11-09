@@ -52,3 +52,13 @@ module "ec2" {
   public_subnets = module.vpc.public_subnets
   aws_security_group_id = module.public-rt.aws_security_group_id
 }
+
+module "ec2-pvt" {
+  source = "./05-ec2-pvt"
+  depends_on = [ module.private-rt ]
+  prefix = var.prefix
+  availability_zones = var.availability_zones
+  private_subnets = module.vpc.private_subnets
+  aws_security_group_id = module.public-rt.aws_security_group_id
+  aws_vpc_id = module.vpc.aws_vpc_id
+}
