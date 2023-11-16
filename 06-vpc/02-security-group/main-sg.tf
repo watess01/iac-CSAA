@@ -1,6 +1,6 @@
 resource "aws_security_group" "webaccess" {
   name        = "webaccess"
-  description = "Allow ssh http inbound traffic"
+  description = "Allow ssh & http inbound traffic"
   vpc_id      = var.vpc_id
 
   ingress {
