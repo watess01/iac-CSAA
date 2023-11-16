@@ -1,0 +1,25 @@
+{
+  "yaml.customTags": [
+    "!Equals sequence",
+    "!FindInMap sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!Join sequence",
+    "!Ref",
+    "!Select sequence",
+    "!Split sequence",
+    "!Sub"
+  ],
+  "yaml.format.enable": true,
+  "yaml.format.singleQuote": true,
+  "yaml.format.bracketSpacing": false,
+  "yaml.format.proseWrap": "always",
+  "yaml.format.printWidth": 120,
+  "yaml.format.tabWidth": 2,
+  "yaml.format.semi": false,
+  "yaml.format.useTabs": false,
+  "yaml.format.trailingComma": "none",
+  "yaml.format.arrowParens": "avoid",
+  "yaml.format.jsxBracketSameLine": false
+}
