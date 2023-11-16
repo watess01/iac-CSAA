@@ -30,6 +30,6 @@ module "cluster" {
   source = "./03-cluster"
   depends_on = [ module.task, module.vpc  ]
   task_def_arn = module.task.task_def_arn
-  subnet_ids = module.vpc.private_subnets
+  subnet_ids = module.vpc.subnet_ids
   security_group_id = module.vpc.security_group_id
 }

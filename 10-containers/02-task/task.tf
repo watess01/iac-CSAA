@@ -16,20 +16,10 @@ resource "aws_ecs_task_definition" "web" {
       }
     ]
   }])
-
-
-  # use fargate serverless app environment
-    network_mode             = "awsvpc"
-    requires_compatibilities = ["FARGATE"]
-    cpu                      = "256"
-    memory                   = "512"
-    # set task execution role to ecsTaskExecutionRole
-    # execution_role_arn       = "arn:aws:iam::859079231122:role/ecsTaskExecutionRole"
-    
-
-  
-
-
+  network_mode             = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+  cpu                      = "256"
+  memory                   = "512"
  }
 
 
