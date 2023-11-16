@@ -37,7 +37,6 @@ resource "vpc" "my-vpc" {
 resource "aws_subnet" "private-subnet" {
   count = length(var.availability_zones)
   vpc_id = vpc.my-vpc.id
-  cidr_block = "10.0.1.0/31"
   cidr_block = "10.0.${count.index}.0/24"
 }
 
