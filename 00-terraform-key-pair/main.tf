@@ -9,7 +9,7 @@ terraform {
 
   required_version = ">= 1.2.0"
 }
-# provider for aws and region
+# provider for aws and region.
 provider "aws" {
   region = "eu-west-1"
 }

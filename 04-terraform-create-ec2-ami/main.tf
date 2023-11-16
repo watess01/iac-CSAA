@@ -10,14 +10,10 @@ terraform {
   required_version = ">= 1.2.0"
 }
 
-
-
 # provider for aws and region
 provider "aws" {
   region = "eu-west-1"
 }
-
-
 
 variable "availability_zone" {
   default = "eu-west-1a"
