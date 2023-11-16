@@ -17,17 +17,22 @@ resource "aws_nat_gateway" "nat" {
   }
 }
 
+
+resource "aws_route_table" "private" {
+  vpc_id = var.aws_vpc_id
+  route {
+    cidr_block = "0.0.0.0/0"    
+    nat_gateway_id = aws_nat_gateway.nat.id
+  }
+  
+  tags = {
+    Name = "${var.prefix}-Private-RT"
+  }
+}
+
 # create association of private route table with private subnet
 resource "aws_route_table_association" "private" {
   count = length(var.aws_subnets)
   subnet_id = var.aws_subnets[count.index]
   route_table_id = aws_route_table.private.id
-}
-
-# create route association for private route table with nat gateway
-resource "aws_route" "private" {
-  count = length(var.aws_subnets)
-  route_table_id = aws_route_table.private.id
-  nat_gateway_id = aws_nat_gateway.nat.id
-  destination_cidr_block = "0.0.0.0/0"
 }

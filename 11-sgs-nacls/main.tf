@@ -22,22 +22,43 @@ module "vpc" {
   
 }
 
-module "rt" {
-  source = "./02-rt"
+module "public-rt" {
+  source = "./02-public-rt"
   depends_on = [ module.vpc ]
   prefix = var.prefix
   aws_vpc_id = module.vpc.aws_vpc_id
   availability_zones = var.availability_zones
-  aws_subnets = module.vpc.public_subnets
-  igw_id = module.vpc.igw_id
+  public_subnets = module.vpc.public_subnets
+  private_subnets = module.vpc.private_subnets
 }
 
-module "nat-gateway" {
-  source = "./03-nat-gateway"
-  depends_on = [ module.rt ]
+module "private-rt" {
+  source = "./03-private-rt"
+  depends_on = [ module.public-rt ]
   prefix = var.prefix
   aws_vpc_id = module.vpc.aws_vpc_id
   availability_zones = var.availability_zones
   aws_subnets = module.vpc.private_subnets
-  private_rt = module.private-rt.private_rt
+
+}
+
+module "ec2" {
+  source = "./04-ec2"
+  depends_on = [ module.private-rt ]
+  prefix = var.prefix
+  aws_vpc_id = module.vpc.aws_vpc_id
+  availability_zones = var.availability_zones
+  aws_subnets = module.vpc.private_subnets
+  public_subnets = module.vpc.public_subnets
+  aws_security_group_id = module.public-rt.aws_security_group_id
+}
+
+module "ec2-pvt" {
+  source = "./05-ec2-pvt"
+  depends_on = [ module.private-rt ]
+  prefix = var.prefix
+  availability_zones = var.availability_zones
+  private_subnets = module.vpc.private_subnets
+  aws_security_group_id = module.public-rt.aws_security_group_id
+  aws_vpc_id = module.vpc.aws_vpc_id
 }
