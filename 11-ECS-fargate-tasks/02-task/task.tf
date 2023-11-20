@@ -22,5 +22,3 @@ resource "aws_ecs_task_definition" "web" {
   memory                   = "512"
  }
 
-
-# create a cluster for ECS

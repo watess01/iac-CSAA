@@ -33,3 +33,15 @@ module "cluster" {
   subnet_ids = module.vpc.subnet_ids
   security_group_id = module.vpc.security_group_id
 }
+
+# application load balancer - distribut port 80 to task host ports
+resource "aws_lb" "ecs" {
+  name               = "ecs-alb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [module.vpc.security_group_id]
+  subnets            = module.vpc.subnet_ids
+  tags = {
+    Name = "ecs-alb"
+  }
+}
