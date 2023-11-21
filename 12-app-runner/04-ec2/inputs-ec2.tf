@@ -1,0 +1,9 @@
+variable "availability_zone" {  type = string}
+variable "instance_type" {  type = string}
+variable "vpc_cidr" { type = string }
+variable ami {  type = string}
+variable prefix { type = string }
+variable aws_subnet_id { type = string }
+variable security_group_id { type = string }
+variable "instance_key" { type = string }
+variable "ECRProfileName"  { type = string }
