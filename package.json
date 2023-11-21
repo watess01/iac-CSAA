@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "zip13": "cd ./13-serverless/src && python3 -m pip install --target ./python/lib/python3.7/site-packages -r requirements.txt && zip -r ../out/hello.zip ./*.py && cd ..",
+    "hcl13": "cd ./13-serverless && terraform init && terraform apply -auto-approve && cd ..",
+    "build13": "npm run zip13 && npm run hcl13"
+  }
+}
