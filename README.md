@@ -12,6 +12,7 @@
 7. Security Groups & NACLs
 8. VPC Peering
 9. Containers
+10. App Runner
 
 ## terraform
 

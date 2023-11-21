@@ -18,12 +18,20 @@ resource "aws_iam_instance_profile" "ECRInstanceProfile" {
   role = aws_iam_role.ECRRole.name
 }
 
-resource "aws_iam_role_policy_attachment" "ECRRolePolicyAttach" {
+resource "aws_iam_role_policy_attachment" "ECRRolePolicyAttach1" {
   role       = aws_iam_role.ECRRole.name
   policy_arn = aws_iam_policy.ECRPolicy.arn
 }
 
+resource "aws_iam_role_policy_attachment" "ECRRolePolicyAttach2" {
+  role       = aws_iam_role.ECRRole.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
 
 output "ECRProfileName" {
   value = aws_iam_instance_profile.ECRInstanceProfile.name
+}
+
+output "ECRPRoleArn" {
+  value = aws_iam_role.ECRRole.arn
 }

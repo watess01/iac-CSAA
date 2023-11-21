@@ -31,11 +31,13 @@ module "security_group" {
  
 module "iam" {
   source = "./03-iam"
+  depends_on = [ module.security_group ]
 }
 
 
 module "ec2" {
   source = "./04-ec2"
+  depends_on = [ module.iam ]
   security_group_id = module.security_group.security_group_id
   instance_type = var.instance_type
   ami = var.ami
@@ -45,4 +47,11 @@ module "ec2" {
   availability_zone = var.availability_zone
   instance_key = var.instance_key
   ECRProfileName = module.iam.ECRProfileName
+}
+
+module "ecr" {
+  source = "./05-app-runner"
+  depends_on = [ module.ec2, module.iam ]
+  prefix = var.prefix
+  ECRPRoleArn = module.iam.ECRPRoleArn
 }

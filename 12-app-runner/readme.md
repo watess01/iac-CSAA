@@ -7,4 +7,10 @@ This creates:
 
 - vpc, subnet
 - ec2 instance & security group (ssh)
-- userdata script to run on EC2
+- userdata script to install docker on EC2
+- IAM Policy, IAM Trust Policy & IAM Role
+- App runner
+
+# Deliverable
+
+NGINX Web Page is displayed from the Default domain link on the app runner
