@@ -3,6 +3,10 @@
     "zip13": "cd ./13-serverless/src && python3 -m pip install --target ./python/lib/python3.7/site-packages -r requirements.txt && zip -r ../out/hello.zip ./*.py && cd ..",
     "hcl13": "cd ./13-serverless && terraform init && terraform apply -auto-approve && cd ..",
     "build13": "npm run zip13 && npm run hcl13",
-    "destroy13": "cd ./13-serverless && terraform destroy -auto-approve && cd .."
+    "destroy13": "cd ./13-serverless && terraform destroy -auto-approve && cd ..",
+    "zip14": "cd ./14-sqs-lam-dynadb/src && python3 -m pip install --target ./python/lib/python3.7/site-packages -r requirements.txt && zip -r ../out/hello.zip ./*.py && cd ..",
+    "hcl14": "cd ./14-sqs-lam-dynadb/terraform && pwd && terraform apply -auto-approve && cd ../..",
+    "build14": "npm run zip14 && npm run hcl14",
+    "destroy14": "cd ./14-sqs-lam-dynadb/terraform && terraform destroy -auto-approve && cd ../.."
   }
 }
