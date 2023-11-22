@@ -15,39 +15,39 @@ provider "aws" {
     region = var.region
 }
 
-module "vpc" {
-  source = "./01-vpc"
-  vpc_cidr = var.vpc_cidr  
-  subnet_cidr = var.subnet_cidr
-  availability_zone = var.availability_zone
+module "db" {
+  source = "./02-dynamodb"
+  # depends_on = [ module.vpc ]
   prefix = var.prefix
 }
 
-module "iam" {
-  source = "./02-iam"
-  depends_on = [ module.vpc ]
-  prefix = var.prefix
-}
-
-# create a lambda using the python code in the ./src directory
 module "sqs" {
   source = "./03-sqs"
-  depends_on = [ module.vpc ]
+  # depends_on = [ module.vpc ]
   prefix = var.prefix
   timeout = var.timeout
 }
+module "iam" {
+  source = "./04-iam"
+  depends_on = [  module.db, module.sqs ]
+  prefix = var.prefix
+  dynamodb_table_arn = module.db.dynamodb_table_arn
+}
 
 module "lambda" {
-  source = "./04-lambda"
-  depends_on = [ module.iam ]
+  source = "./05-lambda"
+  depends_on = [ module.iam, module.sqs ]
   lambda_role_arn = module.iam.lambda_role_arn
   prefix = var.prefix
   sqs_arn = module.sqs.sqs_arn
   timeout = var.timeout
 }
 
-module "db" {
-  source = "./05-dynamodb"
-  depends_on = [ module.vpc ]
-  prefix = var.prefix
+
+output "policy" {
+  value = module.iam.policy
+}
+
+output "loaded_policy" {
+  value = module.iam.loaded_policy
 }
