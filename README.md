@@ -9,20 +9,21 @@ rather than perfect delivery.
 
 ## Subjects
 
-0. Key Pair
-1. EC2 Instance
-2. Bastion Host
-3. EC2 Snapshot - Create AMI snapshot
-4. Autoscaling
-5. VPC
-6. Web Server - with ALB & NLB over 2 regions & 2 azs
-7. Security Groups & NACLs
-8. VPC Peering
-9. Containers
-10. ECS Fargate Tasks
-11. App Runner - NGINX WebServer on Docker on EC2 in an App Runner
-12. Simple Serverless - Python Lambda Hello World
-13. Simple Event Driven App - SQS -> Lambda -> DynamoDb
+1. Key Pair
+2. EC2 Instance
+3. Bastion Host
+4. EC2 Snapshot - Create AMI snapshot
+5. Autoscaling
+6. VPC
+7. Web Server - with ALB & NLB over 2 regions & 2 azs
+8. Security Groups & NACLs
+9. VPC Peering
+10. Containers
+11. ECS Fargate Tasks
+12. App Runner - NGINX WebServer on Docker on EC2 in an App Runner
+13. Simple Serverless - Python Lambda Hello World
+14. Simple Event Driven App - SQS -> Lambda -> DynamoDb
+15. Step Functions -> StateMachine Workflow, Python Lambda
 
 ## terraform
 

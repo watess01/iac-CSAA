@@ -1,0 +1,97 @@
+{
+  "Comment": "A simple Step Function ",
+  "StartAt": "Pass",
+  "States": {
+    "Pass": {
+      "Type": "Pass",
+      "Next": "Enter Cave"
+    },
+    "Enter Cave": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.enterCave",
+          "BooleanEquals": true,
+          "Next": "Yes"
+        },
+        {
+          "Variable": "$.enterCave",
+          "BooleanEquals": false,
+          "Next": "No"
+        }
+      ],
+      "Default": "Yes"
+    },
+    "Yes": {
+      "Type": "Pass",
+      "Next": "Wait 3 sec"
+    },
+    "No": {
+      "Type": "Fail",
+      "Cause": "Not Enter Cave"
+    },
+    "Wait 3 sec": {
+      "Type": "Wait",
+      "Seconds": 3,
+      "Next": "Parallel State"
+    },
+    "Parallel State": {
+      "Type": "Parallel",
+      "Next": "The End",
+      "Branches": [
+        {
+          "StartAt": "Run from Troll",
+          "States": {
+            "Run from Troll": {
+              "Type": "Pass",
+              "Result": "Run Away",
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "Chase or Not",
+          "States": {
+            "Chase or Not": {
+              "Type": "Task",
+              "Resource": "arn:aws:lambda:eu-west-1:859079231122:function:troll_chase_handler",
+              "Next": "Process Chase"
+            },
+            "Process Chase": {
+              "Type": "Choice",
+              "Choices": [
+                {
+                  "Variable": "$.decision",
+                  "StringEquals": "chase",
+                  "Next": "Troll Chase"
+                },
+                {
+                  "Variable": "$.decision",
+                  "StringEquals": "ignore",
+                  "Next": "Troll No Chase"
+                }
+              ],
+              "Default": "Troll Chase"
+            },
+            "Troll Chase": {
+              "Type": "Pass",
+              "Result": "Troll Eat You",
+              "End": true
+            },
+            "Troll No Chase": {
+              "Type": "Pass",
+              "Result": "Troll Eat Sheep",
+              "End": true
+            }
+          }
+        }
+      ]
+    },
+
+    "The End": {
+      "Type": "Pass",
+      "Result": "The End",
+      "End": true
+    }
+  }
+}

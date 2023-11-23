@@ -7,6 +7,10 @@
     "zip14": "cd ./14-sqs-lam-dynadb/src && python3 -m pip install --target ./python/lib/python3.7/site-packages -r requirements.txt && zip -r ../out/hello.zip ./*.py && cd ..",
     "hcl14": "cd ./14-sqs-lam-dynadb/terraform && pwd && terraform apply -auto-approve && cd ../..",
     "build14": "npm run zip14 && npm run hcl14",
-    "destroy14": "cd ./14-sqs-lam-dynadb/terraform && terraform destroy -auto-approve && cd ../.."
+    "destroy14": "cd ./14-sqs-lam-dynadb/terraform && terraform destroy -auto-approve && cd ../..",
+    "zip15": "cd ./15-step-functions/src && python3 -m pip install --target ./python/lib/python3.7/site-packages -r requirements.txt && mkdir -p ../out && zip -r ../out/troll.zip ./*.py && cd ..",
+    "hcl15": "cd ./15-step-functions/terraform && terraform init && terraform apply -auto-approve && cd ../..",
+    "build15": "npm run zip15 && npm run hcl15",
+    "destroy15": "cd ./15-step-functions/terraform && terraform destroy -auto-approve && cd ../.."
   }
 }

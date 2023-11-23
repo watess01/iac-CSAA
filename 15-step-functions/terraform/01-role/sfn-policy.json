@@ -1,0 +1,10 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": ["lambda:InvokeFunction"],
+      "Resource": "arn:aws:lambda:eu-west-1:859079231122:function:troll_chase_handler",
+      "Effect": "Allow"
+    }
+  ]
+}

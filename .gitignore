@@ -27,3 +27,12 @@ override.tf.json
 .terraformrc
 terraform.rc
 *.pem
+
+# ignore generated files
+*.tf.json
+*.tfplan
+*.tfstate
+*.tfstate.backup
+*.tfstate.backup.*
+*.tfstate.backup.????-??-??.??:??:??
+**/out/*
