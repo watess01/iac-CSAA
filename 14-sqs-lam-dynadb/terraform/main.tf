@@ -42,12 +42,3 @@ module "lambda" {
   sqs_arn = module.sqs.sqs_arn
   timeout = var.timeout
 }
-
-
-output "policy" {
-  value = module.iam.policy
-}
-
-output "loaded_policy" {
-  value = module.iam.loaded_policy
-}
